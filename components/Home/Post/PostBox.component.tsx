@@ -1,9 +1,24 @@
-import { LinkIcon, PhotographIcon } from '@heroicons/react/outline'
+import {
+  LinkIcon,
+  PhotographIcon,
+  ViewListIcon,
+} from '@heroicons/react/outline'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Avatar from './Avatar'
-import { Button } from 'primereact/button'
+
+import { useMutation } from '@apollo/client'
+
+import { ADD_POST, ADD_SUBREDDIT } from '../../../graphql/mutations'
+
+import client from '../../../apollo-client'
+
+import { GET_SUBREDDIT_BY_TOPIC } from '../../../graphql/queries'
+
+import { Toast } from 'primereact/toast'
+import toast, { Toaster } from 'react-hot-toast'
+
 const styles = {
   wrapper:
     ' sticky top-16 z-50 rounded-xl border border-gray-400 bg-white p-2 ',
@@ -27,7 +42,13 @@ interface FormData {
 }
 
 const PostBox = () => {
+  //! for tost
+
+  //! session
   const { data: session } = useSession()
+  //! mutation
+  const [createPost] = useMutation(ADD_POST)
+  const [addSubreddit] = useMutation(ADD_SUBREDDIT)
   const {
     register,
     setValue,
@@ -41,11 +62,90 @@ const PostBox = () => {
 
   //! to handle submit
   const onSubmitForm = handleSubmit(async (formData) => {
-    console.log('Clicked')
-    console.log({ formData })
+    //! success tost
+    const post_notification = toast.loading('creating post...')
+    try {
+      //! query for subreddit topic
+      const { data: getSubredditListByTopic } = await client.query({
+        query: GET_SUBREDDIT_BY_TOPIC,
+        variables: {
+          topic: formData.subreddit,
+        },
+      })
+      const Is_SubReddit_exist =
+        getSubredditListByTopic.getSubredditListByTopic.length > 0
+      if (!Is_SubReddit_exist) {
+        //! if not exist then create it
+        console.log('subreddit not exist so we are creating')
+
+        const {
+          data: { insertSubReddit: newSubreddit },
+        } = await addSubreddit({
+          variables: {
+            topic: formData.subreddit,
+          },
+        })
+
+        const image = formData.postImage || ''
+        console.log({ newSubreddit })
+
+        const {
+          data: { insertPost: newPost },
+        } = await createPost({
+          variables: {
+            body: formData.postBody,
+            image: image,
+            subreddit_id: newSubreddit?.id,
+            title: formData.postTitle,
+            username: session?.user?.name,
+          },
+        })
+        console.log('new post', newPost)
+        //! after post added
+        toast.success('post added successfully', {
+          id: post_notification,
+        })
+      } else {
+        //! if exist then create it
+        console.log('subreddit exist so we are creating')
+        const image = formData.postImage || ''
+        console.log({
+          id: getSubredditListByTopic.getSubredditListByTopic[0].id,
+        })
+        const {
+          data: { insertPost: newPost },
+        } = await createPost({
+          variables: {
+            title: formData.postTitle,
+            body: formData.postBody,
+            image,
+            subreddit_id: getSubredditListByTopic.getSubredditListByTopic[0].id,
+            username: session?.user?.name,
+          },
+        })
+        console.log('new post', newPost)
+      }
+      //! after post added
+      setValue('postTitle', '')
+      setValue('postBody', '')
+      setValue('subreddit', '')
+      setValue('postImage', '')
+
+      //! after post added
+      toast.success('post added successfully', {
+        id: post_notification,
+      })
+    } catch (error) {
+      //! to handle errors
+      toast.error('oops something went wrong', {
+        id: post_notification,
+      })
+      console.log(error)
+    }
   })
   return (
     <form onSubmit={onSubmitForm} className={styles.wrapper}>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className={styles.mainContainer}>
         {/* Avatar */}
         <Avatar seed="magesh" />

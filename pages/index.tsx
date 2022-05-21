@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Home/Header/Header.component'
+import Feed from '../components/Home/Post/Feed.component.'
 import PostBox from '../components/Home/Post/PostBox.component'
 
 const Home: NextPage = () => {
@@ -11,11 +12,12 @@ const Home: NextPage = () => {
       </Head>
 
       {/* Post box */}
-      {/* <main className="mx-auto max-w-4xl"> */}
       <PostBox />
-      {/* </main> */}
 
-      {/* Feed */}
+      <div className="flex">
+        {/* Feed */}
+        <Feed />
+      </div>
       {/* Sub reddit */}
     </div>
   )

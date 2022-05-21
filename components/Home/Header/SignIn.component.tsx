@@ -29,8 +29,6 @@ const SignIn = ({ status, session }: Props) => {
           <Image
             objectFit="contain"
             src="https://links.papareact.com/23l"
-            height={5}
-            width={5}
             layout="fill"
           />
         </div>
