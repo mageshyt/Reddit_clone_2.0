@@ -9,4 +9,7 @@
   .animate {
     @apply transition transition-all duration-300 ease-in-out;
   }
+  .voteButtons {
+    @apply animate h-6 w-6 cursor-pointer rounded-lg p-1  hover:bg-gray-200 hover:shadow-lg;
+  }
 }

@@ -12,15 +12,33 @@ export const GET_SUBREDDIT_BY_TOPIC = gql`
 `
 
 export const GET_ALL_POSTS = gql`
-  query GetAllPosts($topic: String!) {
-    getAllPosts(topic: $topic) {
+  query GetAllPosts {
+    getPostList {
       body
+      title
+      username
       created_at
       id
       image
-      subreddit_id
-      title
-      username
+      comments {
+        created_at
+        id
+        post_id
+        text
+        username
+      }
+      subreddit {
+        created_at
+        id
+        topic
+      }
+      votes {
+        created_at
+        id
+        post_id
+        upvote
+        username
+      }
     }
   }
 `
