@@ -89,7 +89,7 @@ const PostBox = ({ subreddit }: Props) => {
         })
 
         const image = formData.postImage || ''
-        // console.log({ newSubreddit })
+        console.log({ newSubreddit })
 
         const {
           data: { insertPost: newPost },
@@ -102,7 +102,7 @@ const PostBox = ({ subreddit }: Props) => {
             username: session?.user?.name,
           },
         })
-        // console.log('new post', newPost)
+        console.log('new post', newPost)
         //! after post added
         toast.success('post added successfully', {
           id: post_notification,
@@ -123,7 +123,7 @@ const PostBox = ({ subreddit }: Props) => {
             username: session?.user?.name,
           },
         })
-        // console.log('new post', newPost)
+        console.log('new post', newPost)
       }
       //! after post added
       setValue('postTitle', '')
@@ -144,7 +144,7 @@ const PostBox = ({ subreddit }: Props) => {
     }
   })
   return (
-    <form onSubmit={() => onSubmitForm()} className={styles.wrapper}>
+    <form onSubmit={onSubmitForm} className={styles.wrapper}>
       <Toaster position="top-center" reverseOrder={false} />
       <div className={styles.mainContainer}>
         {/* Avatar */}

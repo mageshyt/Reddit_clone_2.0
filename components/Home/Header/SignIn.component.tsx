@@ -1,14 +1,14 @@
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import { signIn, signOut } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React from 'react'
 
 interface Props {
   status: string
-  session: any
 }
 
-const SignIn = ({ status, session }: Props) => {
+const SignIn = ({ status }: Props) => {
+  const { data: session } = useSession()
   return (
     <div>
       <div

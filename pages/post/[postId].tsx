@@ -10,6 +10,8 @@ import { ADD_COMMENT } from '../../graphql/mutations'
 import toast, { Toaster } from 'react-hot-toast'
 import Avatar from '../../components/Home/Post/Avatar'
 import TimeAgo from 'react-timeago'
+
+
 // !from data
 interface FormData {
   comment: string
@@ -20,7 +22,6 @@ const PostPage = () => {
     register,
     setValue,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>()
 
@@ -29,9 +30,10 @@ const PostPage = () => {
 
   const { data, loading, error } = useQuery(GET_ALL_POSTS_BY_ID, {
     variables: {
-      post_id: router.query.postId,
+      post_id: router?.query?.postId,
     },
   })
+
   const posts: Post[] = data?.getPostById
 
   //! session user
@@ -64,6 +66,8 @@ const PostPage = () => {
       })
       console.log(error)
     }
+
+
   }
 
   return (
@@ -74,7 +78,7 @@ const PostPage = () => {
         {!loading && (
           <>
             <p className="text-sm">
-              comment as{' '}
+              comment as {' '}
               <span className="font-semibold text-sky-400">
                 {session?.user?.name}
               </span>

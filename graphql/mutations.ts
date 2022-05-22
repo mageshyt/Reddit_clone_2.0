@@ -47,3 +47,16 @@ export const ADD_COMMENT = gql`
     }
   }
 `
+
+//! upvote
+
+export const ADD_VOTE = gql`
+  mutation Upvote($post_id: ID!, $username: String!, $upvote: Boolean!) {
+    insertVote(post_id: $post_id, username: $username, upvote: $upvote) {
+      id
+      post_id
+      username
+      upvote
+    }
+  }
+`

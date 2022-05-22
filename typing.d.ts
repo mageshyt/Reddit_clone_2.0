@@ -12,6 +12,7 @@ export type Vote = {
   post_id: number
   text: string
   username: string
+  upvote: boolean
 }
 
 export type subreddit = {

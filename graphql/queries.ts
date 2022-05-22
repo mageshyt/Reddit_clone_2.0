@@ -86,7 +86,7 @@ export const GET_ALL_POSTS_BY_ID = gql`
       created_at
       id
       image
-      
+
       comments {
         created_at
         id
@@ -106,6 +106,33 @@ export const GET_ALL_POSTS_BY_ID = gql`
         upvote
         username
       }
+    }
+  }
+`
+
+//! get all votes by id
+export const GET_VOTES_BY_ID = gql`
+  query GetVotes($post_id: ID!) {
+    getVotesByPostId(post_id: $post_id) {
+      username
+      id
+      post_id
+      upvote
+      created_at
+    }
+  }
+`
+
+
+
+//! to get top communities
+
+export const GET_SUBREDDIT_WITH_LIMIT = gql`
+  query GetSubredditWithLimit($limit: Int!) {
+    getSubredditListLimit(limit: $limit) {
+      id
+      topic
+      created_at
     }
   }
 `

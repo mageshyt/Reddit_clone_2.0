@@ -43,9 +43,9 @@ const Header = () => {
       {/* right Icons */}
       <RightIcons />
       {!session ? (
-        <SignIn session status={'Sign in'} />
+        <SignIn status={'Sign in'} />
       ) : (
-        <SignIn session={session} status={'Sign out'} />
+        <SignIn status={'Sign out'} />
       )}
       {/* Sign in and sign out */}
     </div>
