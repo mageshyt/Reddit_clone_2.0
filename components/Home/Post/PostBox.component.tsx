@@ -1,10 +1,6 @@
-import {
-  LinkIcon,
-  PhotographIcon,
-  ViewListIcon,
-} from '@heroicons/react/outline'
+import { LinkIcon, PhotographIcon } from '@heroicons/react/outline'
 import { useSession } from 'next-auth/react'
-import React, { useRef } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import Avatar from './Avatar'
 
@@ -14,9 +10,8 @@ import { ADD_POST, ADD_SUBREDDIT } from '../../../graphql/mutations'
 
 import client from '../../../apollo-client'
 
-import { GET_SUBREDDIT_BY_TOPIC } from '../../../graphql/queries'
+import { GET_ALL_POSTS, GET_SUBREDDIT_BY_TOPIC } from '../../../graphql/queries'
 
-import { Toast } from 'primereact/toast'
 import toast, { Toaster } from 'react-hot-toast'
 
 const styles = {
@@ -41,13 +36,19 @@ interface FormData {
   postImage: string
 }
 
-const PostBox = () => {
+interface Props {
+  subreddit: string
+}
+
+const PostBox = ({ subreddit }: Props) => {
   //! for tost
 
   //! session
   const { data: session } = useSession()
   //! mutation
-  const [createPost] = useMutation(ADD_POST)
+  const [createPost] = useMutation(ADD_POST, {
+    refetchQueries: [GET_ALL_POSTS, 'getPostList'],
+  })
   const [addSubreddit] = useMutation(ADD_SUBREDDIT)
   const {
     register,
@@ -61,6 +62,7 @@ const PostBox = () => {
   const [imageBox, setImageBox] = React.useState(false)
 
   //! to handle submit
+
   const onSubmitForm = handleSubmit(async (formData) => {
     //! success tost
     const post_notification = toast.loading('creating post...')
@@ -69,7 +71,7 @@ const PostBox = () => {
       const { data: getSubredditListByTopic } = await client.query({
         query: GET_SUBREDDIT_BY_TOPIC,
         variables: {
-          topic: formData.subreddit,
+          topic: subreddit || formData.subreddit,
         },
       })
       const Is_SubReddit_exist =
@@ -87,7 +89,7 @@ const PostBox = () => {
         })
 
         const image = formData.postImage || ''
-        console.log({ newSubreddit })
+        // console.log({ newSubreddit })
 
         const {
           data: { insertPost: newPost },
@@ -100,7 +102,7 @@ const PostBox = () => {
             username: session?.user?.name,
           },
         })
-        console.log('new post', newPost)
+        // console.log('new post', newPost)
         //! after post added
         toast.success('post added successfully', {
           id: post_notification,
@@ -109,9 +111,7 @@ const PostBox = () => {
         //! if exist then create it
         console.log('subreddit exist so we are creating')
         const image = formData.postImage || ''
-        console.log({
-          id: getSubredditListByTopic.getSubredditListByTopic[0].id,
-        })
+
         const {
           data: { insertPost: newPost },
         } = await createPost({
@@ -123,14 +123,14 @@ const PostBox = () => {
             username: session?.user?.name,
           },
         })
-        console.log('new post', newPost)
+        // console.log('new post', newPost)
       }
       //! after post added
       setValue('postTitle', '')
       setValue('postBody', '')
       setValue('subreddit', '')
       setValue('postImage', '')
-
+      setImageBox(false)
       //! after post added
       toast.success('post added successfully', {
         id: post_notification,
@@ -144,7 +144,7 @@ const PostBox = () => {
     }
   })
   return (
-    <form onSubmit={onSubmitForm} className={styles.wrapper}>
+    <form onSubmit={() => onSubmitForm()} className={styles.wrapper}>
       <Toaster position="top-center" reverseOrder={false} />
       <div className={styles.mainContainer}>
         {/* Avatar */}
@@ -154,7 +154,11 @@ const PostBox = () => {
           type="text"
           disabled={!session}
           placeholder={
-            session ? 'Create a post by entering the title' : 'Sign in to post'
+            session
+              ? subreddit
+                ? ` Create a post in r/${subreddit}`
+                : 'Create a post by entering the title'
+              : 'Sign in to post'
           }
           className={styles.TitleInput}
         />
@@ -180,16 +184,19 @@ const PostBox = () => {
               className={styles.InputStyle}
             />
           </div>
+
           {/* Subreddit */}
-          <div className={styles.InputContainer}>
-            <p className={styles.InputsTitle}>Subreddit</p>
-            <input
-              {...register('subreddit', { required: true })}
-              type="text"
-              placeholder={'i.e next js'}
-              className={styles.InputStyle}
-            />
-          </div>
+          {!subreddit && (
+            <div className={styles.InputContainer}>
+              <p className={styles.InputsTitle}>Subreddit</p>
+              <input
+                {...register('subreddit', { required: true })}
+                type="text"
+                placeholder={'i.e next js'}
+                className={styles.InputStyle}
+              />
+            </div>
+          )}
           {/* Image */}
           {imageBox ? (
             <div className={styles.InputContainer}>

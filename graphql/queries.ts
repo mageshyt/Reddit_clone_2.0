@@ -42,3 +42,70 @@ export const GET_ALL_POSTS = gql`
     }
   }
 `
+
+//! get post by topic
+export const GET_ALL_POSTS_BY_TOPIC = gql`
+  query GetAllPosts($topic: String!) {
+    getPostListByTopic(topic: $topic) {
+      body
+      title
+      username
+      created_at
+      id
+      image
+      comments {
+        created_at
+        id
+        post_id
+        text
+        username
+      }
+      subreddit {
+        created_at
+        id
+        topic
+      }
+      votes {
+        created_at
+        id
+        post_id
+        upvote
+        username
+      }
+    }
+  }
+`
+
+//! get post by id
+export const GET_ALL_POSTS_BY_ID = gql`
+  query GetAllPosts($post_id: ID!) {
+    getPostById(post_id: $post_id) {
+      body
+      title
+      username
+      created_at
+      id
+      image
+      
+      comments {
+        created_at
+        id
+        post_id
+        text
+        username
+      }
+      subreddit {
+        created_at
+        id
+        topic
+      }
+      votes {
+        created_at
+        id
+        post_id
+        upvote
+        username
+      }
+    }
+  }
+`

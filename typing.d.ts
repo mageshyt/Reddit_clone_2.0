@@ -20,15 +20,16 @@ export type subreddit = {
   topic: string
 }
 
-export type Post = {
+export interface Post {
   image: string
   subreddit_id: number
   created_at: string
   id: number
+  image: string
   title: string
   username: string
   body: string
   votes: Vote[]
-  comments: Comment[]
+  comments: Comments[]
   subreddit: Subreddit[]
 }

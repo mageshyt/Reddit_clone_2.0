@@ -121,10 +121,13 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-getPostList: [Post]
+  getPostList: [Post]
     @dbquery(
       type: "postgresql"
-      table: "post"
+      query: """
+      select * from "post" order by "created_at" desc
+      """
+
       configuration: "postgresql_config"
     )
   getSubredditList: [Subreddit]
@@ -133,7 +136,21 @@ getPostList: [Post]
       table: "subreddit"
       configuration: "postgresql_config"
     )
-  # this Query is to get subreddit by Topic
+
+  # ! get post list by  topic we are joining two table
+  getPostListByTopic(topic: String!): [Post]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * ,"post"."id" as id from "post"
+      join "subreddit" on "subreddit"."id" = "post"."subreddit_id"
+       where "subreddit"."topic" = $1
+       order by "post"."created_at" desc
+      """
+      configuration: "postgresql_config"
+    )
+
+  # ! this Query is to get subreddit by Topic
   getSubredditListByTopic(topic: String!): [Subreddit]
     @dbquery(
       type: "postgresql"
@@ -142,6 +159,17 @@ getPostList: [Post]
       """
       configuration: "postgresql_config"
     )
+
+  # ! get post by post id
+  getPostById(post_id: ID!): Post
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "post" where "post"."id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
   getVoteList: [Vote]
     @dbquery(
       type: "postgresql"
@@ -176,6 +204,16 @@ type Mutation {
       dml: INSERT
       configuration: "postgresql_config"
     )
+
+  #! to insert comments
+  insertComment(post_id: ID!, username: String!, text: String!): Comments
+    @dbquery(
+      type: "postgresql"
+      table: "comments"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+
   """
   In this mutation example you can see how to do a mutation to delete data from the database.
   """

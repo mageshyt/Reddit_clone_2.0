@@ -5,11 +5,7 @@ import React from 'react'
 
 interface Props {
   status: string
-  session: {
-    user: {
-      name: string
-    }
-  }
+  session: any
 }
 
 const SignIn = ({ status, session }: Props) => {

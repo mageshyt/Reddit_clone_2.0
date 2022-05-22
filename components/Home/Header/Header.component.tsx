@@ -6,25 +6,27 @@ import Searchbar from '../Searchbar/searchbar.component'
 import RightIcons from './RightIcons.component'
 import { signIn, useSession } from 'next-auth/react'
 import SignIn from './SignIn.component'
-
+import Link from 'next/link'
 const styles = {
   ImageContainer: 'relative h-10 w-20 flex-shrink-0  cursor-pointer',
   Icon: 'h-5 w-5',
-  wrapper: 'flex px-4 py-2 bg-white shadow-md sticky top-0 z-50',
+  wrapper: 'flex px-4 items-center py-2 bg-white shadow-md sticky top-0 z-50',
 }
 const Header = () => {
   const { data: session } = useSession()
   const [value1, setValue1] = useState('')
-  console.log(session)
   return (
     <div className={styles.wrapper}>
       <div className={styles.ImageContainer}>
         {/* Logo */}
-        <Image
-          layout="fill"
-          objectFit="contain"
-          src="https://links.papareact.com/fqy"
-        />
+        <Link href="/">
+          <Image
+            priority
+            layout="fill"
+            objectFit="contain"
+            src="https://links.papareact.com/fqy"
+          />
+        </Link>
       </div>
 
       {/* Icons */}
@@ -41,7 +43,7 @@ const Header = () => {
       {/* right Icons */}
       <RightIcons />
       {!session ? (
-        <SignIn status={'Sign in'} />
+        <SignIn session status={'Sign in'} />
       ) : (
         <SignIn session={session} status={'Sign out'} />
       )}
