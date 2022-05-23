@@ -16,14 +16,16 @@ import toast, { Toaster } from 'react-hot-toast'
 
 const styles = {
   wrapper:
-    ' sticky top-16 z-50 rounded-xl border border-gray-400 bg-white p-2 ',
+    ' sticky top-16 z-50 rounded-xl border border-gray-400 bg-[#131516] p-2 ',
   mainContainer: 'flex items-center space-x-3 ',
-  TitleInput: 'pl- flex-1 rounded-md bg-gray-50 p-2 outline-none',
+  TitleInput:
+    'pl- flex-1 text-white placeholder:text-gray-300 rounded-md bg-[#1b1d1e] p-2 outline-none',
   //   ! style for input Container
   InputContainer: 'flex items-center px-2',
-  InputsTitle: 'min-w-[90px]',
+  InputsTitle: 'min-w-[90px] text-white',
   // ! style for body and subreddit image input
-  InputStyle: 'm-2 flex-1 bg-blue-50  p-2 outline-none',
+  InputStyle:
+    'm-2 flex-1 bg-blue-50 text-white placeholder:text-gray-300   bg-[#1b1d1e] p-2 outline-none',
   Icon: 'h-6 cursor-pointer text-gray-400 hover:text-black',
   TextWarning: 'text-red-500',
 }
@@ -148,6 +150,7 @@ const PostBox = ({ subreddit }: Props) => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className={styles.mainContainer}>
         {/* Avatar */}
+
         <Avatar seed="magesh" />
         <input
           {...register('postTitle', { required: true })}

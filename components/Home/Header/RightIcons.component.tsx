@@ -11,7 +11,7 @@ import { GlobeIcon, MenuIcon } from '@heroicons/react/solid'
 const RightIcons = () => {
   return (
     <div>
-      <div className=" mx-5 hidden items-center space-x-2 text-gray-500 lg:inline-flex">
+      <div className=" mx-5 hidden items-center space-x-2 text-gray-400 lg:inline-flex">
         <SparklesIcon className="icon" />
         <GlobeIcon className="icon" />
         <VideoCameraIcon className="icon" />

@@ -28,8 +28,8 @@ const Home: NextPage = () => {
         {/* Feed */}
         <Feed />
         {/* Top Communities */}
-        <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border-gray-300 bg-white lg:inline">
-          <p className="text-md p-3 font-bold">Top Communities</p>
+        <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border-gray-300 bg-[#111213] lg:inline">
+          <p className="text-md p-3 font-bold text-white">Top Communities</p>
           <div>
             {/* List by subreddit */}
             {subreddit?.map((sub, idx) => (

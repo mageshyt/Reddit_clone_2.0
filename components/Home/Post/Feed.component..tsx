@@ -21,7 +21,7 @@ const Feed = ({ topic }: Props) => {
   if (loading)
     return (
       <div className="mt-10 w-full space-y-5">
-        <SkeletonTheme baseColor="#ffffff">
+        <SkeletonTheme highlightColor="#292828" baseColor="#121212">
           <Skeleton
             className="my-5 shadow-xl"
             width={'100%'}

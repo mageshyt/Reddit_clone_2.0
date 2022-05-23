@@ -10,13 +10,13 @@ interface Props {
 
 const SubRedditRow = ({ topic, index }: Props) => {
   return (
-    <div className="flex items-center space-x-2 border-t bg-white px-4 py-2 last:rounded-b">
+    <div className="flex items-center space-x-2 border-t bg-[#121212] px-4 py-2 last:rounded-b">
       <p>{index + 1}</p>
       <ChevronUpIcon className="h-4 w-4 text-green-400 " />
       <Avatar seed={topic} />
-      <p className="flex-1 truncate"> r/{topic}</p>
+      <p className="flex-1 truncate text-zinc-400"> r/{topic}</p>
       <Link href={`/subreddit/${topic}`}>
-        <span className="cursor-pointer rounded-xl bg-sky-400 p-2 text-sm font-bold text-gray-600 hover:text-gray-900">
+        <span className="cursor-pointer rounded-xl bg-sky-400 p-2 text-sm font-bold text-gray-800 hover:text-gray-900">
           View
         </span>
       </Link>

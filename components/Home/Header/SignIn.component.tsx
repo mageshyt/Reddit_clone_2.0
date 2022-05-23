@@ -30,15 +30,18 @@ const SignIn = ({ status }: Props) => {
         </div>
         <div>
           {session && (
-            <p className="truncate text-xs"> {session?.user?.name} </p>
+            <p className="truncate text-xs text-white">
+              {' '}
+              {session?.user?.name}{' '}
+            </p>
           )}
         </div>
         {/* when user is logged in then show down icon*/}
         {session && (
-          <ChevronDownIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
+          <ChevronDownIcon className="h-5 w-5 flex-shrink-0 text-gray-200" />
         )}
         {/* Show sign in when user is not login */}
-        {!session && <span className="text-gray-500">{status}</span>}
+        {!session && <span className="text-gray-200">{status}</span>}
       </div>
     </div>
   )

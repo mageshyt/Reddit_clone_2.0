@@ -22,16 +22,16 @@ interface Props {
 
 const styles = {
   wrapper:
-    'my-3 flex cursor-pointer rounded-md bg-white shadow-lg hover:border hover:border-gray-600',
+    'my-3 flex cursor-pointer rounded-md bg-[#121212] shadow-lg hover:border hover:border-gray-600',
   Votes:
-    'flex  flex-col items-center justify-start space-y-1 rounded-l-md bg-gray-50  p-4 text-gray-400',
+    'flex  flex-col  items-center justify-start space-y-1 rounded-l-md bg-[#191a1b]  p-4 text-gray-400',
 
   topic:
-    'cursor-pointer font-bold  text-black hover:text-sky-500 hover:underline',
-  body: 'text-xl font-bold text-gray-800',
+    'cursor-pointer font-bold  text-blue-300 hover:text-sky-500 hover:underline',
+  body: 'text-xl font-bold text-gray-100',
 
   PostButton:
-    'flex items-center text-sm p-2 space-x-1 my-2 rounded-md hover:bg-gray-100 cursor-pointer',
+    'flex items-center text-sm p-2 space-x-1 my-2 rounded-md hover:bg-[#262727] cursor-pointer',
 }
 const FeedPost = ({ post }: Props) => {
   // ! user
@@ -108,12 +108,13 @@ const FeedPost = ({ post }: Props) => {
   if (!post)
     return (
       <div className="mt-10 w-full space-y-5">
-        <SkeletonTheme baseColor="#ffffff">
+        <SkeletonTheme highlightColor="#121212" baseColor="#121212">
           <Skeleton
             className="my-5 shadow-xl"
             width={'100%'}
             height={500}
             count={2}
+            baseColor="#232628"
           />
         </SkeletonTheme>
       </div>
@@ -139,7 +140,7 @@ const FeedPost = ({ post }: Props) => {
 
           <div className="flex items-center space-x-3">
             <Avatar seed={post?.subreddit[0]?.topic} />
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-100">
               <Link href={`/subreddit/${post?.subreddit[0]?.topic}`}>
                 <span className={styles.topic}>
                   r/{post?.subreddit[0]?.topic}
@@ -153,7 +154,9 @@ const FeedPost = ({ post }: Props) => {
             {/* title */}
             <h3 className={styles.body}>{post?.title}</h3>
             {post?.body.split('\n').map((line, idx) => (
-              <p key={idx}>{line}</p>
+              <p className="text-gray-400" key={idx}>
+                {line}
+              </p>
             ))}
           </div>
           {/* image */}

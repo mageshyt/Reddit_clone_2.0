@@ -6,11 +6,13 @@ import Searchbar from '../Searchbar/searchbar.component'
 import RightIcons from './RightIcons.component'
 import { signIn, useSession } from 'next-auth/react'
 import SignIn from './SignIn.component'
+import Logo from '../../../assets/Logo.png'
 import Link from 'next/link'
 const styles = {
   ImageContainer: 'relative h-10 w-20 flex-shrink-0  cursor-pointer',
   Icon: 'h-5 w-5',
-  wrapper: 'flex px-4 items-center py-2 bg-white shadow-md sticky top-0 z-50',
+  wrapper:
+    'flex bg-[#1e2122] px-4 items-center py-2 bg-white shadow-md sticky top-0 z-50',
 }
 const Header = () => {
   const { data: session } = useSession()
@@ -24,14 +26,16 @@ const Header = () => {
             priority
             layout="fill"
             objectFit="contain"
-            src="https://links.papareact.com/fqy"
+            src={Logo}
+            height={200}
+            width={200}
           />
         </Link>
       </div>
 
       {/* Icons */}
 
-      <div className="sl:min-w-[300px] mx-7 flex items-center space-x-1 ">
+      <div className="sl:min-w-[300px] mx-7 flex items-center space-x-1 text-white ">
         <HomeIcon className={styles.Icon} />
         <span className="hidden flex-1 lg:block ">Home</span>
         <ChevronDownIcon className={styles.Icon} />

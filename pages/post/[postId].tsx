@@ -11,7 +11,6 @@ import toast, { Toaster } from 'react-hot-toast'
 import Avatar from '../../components/Home/Post/Avatar'
 import TimeAgo from 'react-timeago'
 
-
 // !from data
 interface FormData {
   comment: string
@@ -66,20 +65,18 @@ const PostPage = () => {
       })
       console.log(error)
     }
-
-
   }
 
   return (
-    <div className="mx-auto my-6 max-w-5xl p-4 lg:p-0">
+    <div className="mx-auto  max-w-5xl p-4 lg:p-0">
       <Toaster />
       <FeedPost post={posts} />
-      <div className="-mt-2 rounded-b-md border border-t-0 border-gray-300 bg-white p-5 pl-16">
+      <div className="-mt-4 rounded-b-md   bg-[#181a1b] p-5 pl-16">
         {!loading && (
           <>
-            <p className="text-sm">
-              comment as {' '}
-              <span className="font-semibold text-sky-400">
+            <p className=" space-x-3 text-sm text-white">
+              comment as{' '}
+              <span className="mx-1 font-semibold text-sky-400">
                 {session?.user?.name}
               </span>
             </p>
@@ -90,7 +87,7 @@ const PostPage = () => {
             >
               <textarea
                 {...register('comment', { required: true })}
-                className="h-24 w-full rounded-md border border-gray-300 p-2 pl-4 outline-none disabled:bg-gray-50"
+                className="h-24 w-full rounded-md bg-[#292929] p-2  pl-4 text-white outline-none placeholder:text-white disabled:bg-gray-50"
                 placeholder={
                   session
                     ? 'Write a comment...'
@@ -102,7 +99,7 @@ const PostPage = () => {
               <button
                 type="submit"
                 disabled={session ? false : true}
-                className=" w-full rounded-full bg-sky-400 p-2 px-3 text-white disabled:bg-red-400"
+                className=" mt-4 w-full rounded-full bg-sky-400 p-2 px-3 text-white disabled:bg-red-400"
               >
                 comment
               </button>
@@ -111,7 +108,7 @@ const PostPage = () => {
         )}
       </div>
       {/* display the comments */}
-      <div className=" -my-5 rounded-b-md  border border-t-0 bg-white py-10">
+      <div className=" -my-5 rounded-b-md  bg-[#181a1b] py-10">
         <hr className="py-2" />
         {posts?.comments.map((comment: Comments, idx: number) => (
           <div
@@ -127,13 +124,13 @@ const PostPage = () => {
               <Avatar seed={comment.username} />
             </div>
             {/* Comment */}
-            <div className="flex flex-col items-start p-3">
+            <div className="flex flex-col items-start p-3  text-white">
               <p className="space-x-3 text-xs text-gray-400">
                 <span className=" text-sm font-semibold">
                   {comment.username}
                 </span>
                 <TimeAgo
-                  className="font-bold text-black"
+                  className="font-bold text-pink-300"
                   date={comment?.created_at}
                 />
               </p>
