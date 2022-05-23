@@ -27,6 +27,7 @@
     "stepzen": "^0.16.0"
   },
   "devDependencies": {
+    
     "@types/node": "17.0.4",
     "@types/react": "17.0.38",
     "@types/react-timeago": "^4.1.3",

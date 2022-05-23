@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "incremental": true,
     "strictNullChecks": false
+
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Home/Searchbar/searchbar.component.Jsx", "pages/_app.jsx", "pages/index.jsx"],
   "exclude": ["node_modules"]
 }

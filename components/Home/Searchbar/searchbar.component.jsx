@@ -8,6 +8,7 @@ const Searchbar = () => {
     <div className="flex flex-1 bg-[#181a1b]  ">
       <div className="p-input-icon-left flex-1 ">
         <i className="pi pi-search" />
+
         <InputText
           value={value}
           onChange={(e) => setValue(e.target.value)}

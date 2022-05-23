@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import FeedPost from '../../components/Home/Post/FeedPost.component'
 import { GET_ALL_POSTS_BY_ID } from '../../graphql/queries'
-import { Comments, Post } from '../../typing'
+import { Comments } from '../../typing'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { ADD_COMMENT } from '../../graphql/mutations'
 import toast, { Toaster } from 'react-hot-toast'
@@ -33,7 +33,7 @@ const PostPage = () => {
     },
   })
 
-  const posts: Post[] = data?.getPostById
+  const posts = data?.getPostById
 
   //! session user
   const { data: session } = useSession()
@@ -110,7 +110,7 @@ const PostPage = () => {
       {/* display the comments */}
       <div className=" -my-5 rounded-b-md  bg-[#181a1b] py-10">
         <hr className="py-2" />
-        {posts?.comments.map((comment: Comments, idx: number) => (
+        {posts?.comments.map((comment: any, idx: number) => (
           <div
             key={idx}
             className=" relative flex items-center space-x-2 space-y-5"

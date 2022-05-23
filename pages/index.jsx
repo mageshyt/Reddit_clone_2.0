@@ -1,20 +1,18 @@
 import { useQuery } from '@apollo/client'
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Home/Header/Header.component'
 import Feed from '../components/Home/Post/Feed.component.'
 import PostBox from '../components/Home/Post/PostBox.component'
 import SubRedditRow from '../components/Home/Subreddit/SubRedditRow'
 import { GET_SUBREDDIT_WITH_LIMIT } from '../graphql/queries'
-import { subreddit } from '../typing'
 
-const Home: NextPage = () => {
+const Home = () => {
   const { data } = useQuery(GET_SUBREDDIT_WITH_LIMIT, {
     variables: {
       limit: 10,
     },
   })
-  const subreddit: subreddit[] = data?.getSubredditListLimit
+  const subreddit = data?.getSubredditListLimit
   return (
     <div className=" my-7 mx-auto max-w-5xl">
       <Head>

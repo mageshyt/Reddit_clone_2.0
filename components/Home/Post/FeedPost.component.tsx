@@ -17,7 +17,7 @@ import { ADD_VOTE } from '../../../graphql/mutations'
 import { GET_VOTES_BY_ID } from '../../../graphql/queries'
 
 interface Props {
-  post: Post
+  post: any
 }
 
 const styles = {
@@ -153,7 +153,7 @@ const FeedPost = ({ post }: Props) => {
           <div className="py-4">
             {/* title */}
             <h3 className={styles.body}>{post?.title}</h3>
-            {post?.body.split('\n').map((line, idx) => (
+            {post?.body.split('\n').map((line: string, idx: number) => (
               <p className="text-gray-400" key={idx}>
                 {line}
               </p>

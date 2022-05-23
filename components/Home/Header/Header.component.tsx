@@ -2,12 +2,12 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { ChevronDownIcon, GlobeIcon } from '@heroicons/react/solid'
 import { HomeIcon } from '@heroicons/react/outline'
-import Searchbar from '../Searchbar/searchbar.component'
 import RightIcons from './RightIcons.component'
 import { signIn, useSession } from 'next-auth/react'
 import SignIn from './SignIn.component'
 import Logo from '../../../assets/Logo.png'
 import Link from 'next/link'
+import Searchbar from '../Searchbar/searchbar.component'
 const styles = {
   ImageContainer: 'relative h-10 w-20 flex-shrink-0  cursor-pointer',
   Icon: 'h-5 w-5',

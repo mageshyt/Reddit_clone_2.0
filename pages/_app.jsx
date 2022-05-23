@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css' //theme
 import 'primereact/resources/primereact.min.css' //core css
@@ -9,7 +8,7 @@ import client from '../apollo-client'
 import { SessionProvider } from 'next-auth/react'
 import Header from '../components/Home/Header/Header.component'
 import { ApolloProvider } from '@apollo/client'
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
