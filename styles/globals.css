@@ -6,6 +6,10 @@ body {
   background-color: #262a2b;
 }
 
+.head {
+  background: #1e2122;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;

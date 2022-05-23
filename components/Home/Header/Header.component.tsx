@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ChevronDownIcon, GlobeIcon } from '@heroicons/react/solid'
 import { HomeIcon } from '@heroicons/react/outline'
 import RightIcons from './RightIcons.component'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import SignIn from './SignIn.component'
 import Logo from '../../../assets/Logo.png'
 import Link from 'next/link'
@@ -12,11 +12,10 @@ const styles = {
   ImageContainer: 'relative h-10 w-20 flex-shrink-0  cursor-pointer',
   Icon: 'h-5 w-5',
   wrapper:
-    'flex bg-[#1e2122] px-4 items-center py-2 bg-white shadow-md sticky top-0 z-50',
+    'flex bg-[#1e2122] head px-4 items-center py-2 bg-white shadow-md sticky top-0 z-50',
 }
 const Header = () => {
   const { data: session } = useSession()
-  const [value1, setValue1] = useState('')
   return (
     <div className={styles.wrapper}>
       <div className={styles.ImageContainer}>
