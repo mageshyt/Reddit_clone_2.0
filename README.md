@@ -21,4 +21,7 @@ pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+The web application Reddit 2.0 Clone is built with Next.js and features integration with Tailwind CSS and Superbase. With a user-friendly interface, it allows users to engage in discussions, express their opinions by upvoting and downvoting posts, leave comments, and create their own posts. The application also ensures secure and seamless user authentication and authorization through Reddit OAuth. To explore the features and functionality of this Reddit-inspired clone, feel free to check out the code on GitHub.
+
 # Reddit_clone_2.0
